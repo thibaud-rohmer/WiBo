@@ -1,0 +1,9 @@
+td.file{
+        width:30px;
+        background:url('./img/file.png') no-repeat center;
+}
+
+td.folder{
+        width:30px;
+        background:url('./img/folder.png') no-repeat center;
+}

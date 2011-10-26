@@ -15,6 +15,7 @@ else
 	<link rel="stylesheet" href="inc/style/<?php echo $conf['WiBo']['style']; ?>.css" type="text/css" media="screen" charset="utf-8">
 	 <script type="text/javascript" src="inc/jQuery/jquery.min.js"></script>          
 	 <script type="text/javascript" src="inc/jQuery/jquery-ui.min.js"></script>          
+	 <script type="text/javascript" src="inc/js/buttons.js"></script>          
 	 <script type="text/javascript" src="inc/js/infiniteflow.js"></script>          
 </head>
 
@@ -30,33 +31,10 @@ else
 $pagewidth=$conf['WiBo']['pagewidth'];
 $box_width=($pagewidth - 10* ($conf['WiBo']['columns']-1))/ $conf['WiBo']['columns'];
 $box_height=$conf['WiBo']['boxheight'];
+$columns=$conf['WiBo']['columns'];
 
-function createbox($id,$wconf,$bw,$bh,$bpl){
-
-	$param['left']	=	$wconf['x']*$bw+ ($wconf['x']>0?10*($wconf['x']):0)."px";
-	$param['top']	=	$wconf['y']*$bh+ ($wconf['y']>0?10*($wconf['y']):0)."px";
-	$param['height']=	$wconf['h']*$bh+10*($wconf['h']-1)."px";
-	$param['width'] =	$wconf['w']*$bw+10*($wconf['w']-1)."px";
-	
-	if(file_exists("./widgets/".$wconf['widget']."/style.css"))
-		echo '<link rel="stylesheet" href="./widgets/'.$wconf['widget'].'/style.css" type="text/css" media="screen" charset="utf-8">';
-
-	echo "<div id='box_$id' class='box ".$wconf['color']."'";
-	echo "style=' ";
-	foreach($param as $a => $b){
-		echo("$a:$b; ");
-	}
-	echo ("'>");
-
-	if(isset($wconf['name'])) 
-		echo "<div class='boxtitle'>".$wconf['name']."</div><div class='content'>";
-	else
-		echo "<div>";
-	include("./widgets/".$wconf['widget']."/main.php");
-	echo("</div></div>");
-	return 1;
-
-}
+include('inc/functions.php');
+gener_grid($conf);
 
 foreach ($conf as $id => $widget){
 	if($val!='WiBo')

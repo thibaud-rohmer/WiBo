@@ -30,19 +30,19 @@ div.box{
 	overflow:hidden;
 }
 
-div.blue{
+div.box.blue{
 	background:rgb(0,160,232);
 }
 
-div.red{
+div.box.red{
 	background:red;
 }
 
-div.orange{
+div.box.orange{
 	background:rgb(255,143,0);
 }
 
-div.green{
+div.box.green{
 	background:rgb(0,164,52);
 }
 

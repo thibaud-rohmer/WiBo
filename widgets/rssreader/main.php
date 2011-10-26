@@ -1,15 +1,14 @@
 <?php
-echo '<link rel="stylesheet" href="./lib/rssReader/style.css" type="text/css" media="screen" charset="utf-8">';
-
-
 $feedUrl = $wconf['rss'];
 $rawFeed = file_get_contents($feedUrl); 
 $xml = new SimpleXmlElement($rawFeed);
 
+$arr=$xml->channel->item;
 
-if($wconf['type']=="news"){
+if($wconf['type']=="news" || $wconf['type']=="newslong"){
 	echo "<table>";
-	foreach ($xml->channel->item as $item) 
+	$counter=0;
+	foreach ($arr as $item) 
 	{     
 	    $article = array();
 	    $article['title'] = $item->title;
@@ -18,12 +17,13 @@ if($wconf['type']=="news"){
 
 	echo "<tr><td>";
 	echo "<a href='".$article['link'].">".$article['title']."</a></br>";
-	if($wconf['desc']) echo $article['desc'];
+	if($wconf['type']=="newslong") echo $article['desc'];
 	echo "</td></tr>";
+	if( ++$counter > $wconf['maxitems']) break;
 	}
 	echo "</table>";
-}elseif($wconf['type']=='image'){
-	if($wconf['stretch'])
+}elseif($wconf['type']=='image' || $wconf['type']=='imagestretch'){
+	if($wconf['type']=='imagestretch')
 		echo "<div class='img_stretch'>";
 	else
 		echo "<div class='img_center'>";
@@ -31,8 +31,4 @@ if($wconf['type']=="news"){
 	echo $img;
 	echo "</div>";
 }
-
-
-
-
 ?>

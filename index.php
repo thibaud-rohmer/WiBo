@@ -47,7 +47,10 @@ function createbox($id,$widget,$bw,$bh,$bpl){
 	}
 	echo ("'>");
 
-	echo "<div class='boxtitle'>".$wconf['name']."</div><div class='content'>";
+	if(isset($wconf['name'])) 
+		echo "<div class='boxtitle'>".$wconf['name']."</div><div class='content'>";
+	else
+		echo "<div>";
 	include("./widgets/$widget/main.php");
 	echo("</div>");
 	return 1;

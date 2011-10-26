@@ -40,17 +40,16 @@ function createbox($id,$widget,$bw,$bh,$bpl){
 	$param['height']=	$wconf['h']*$bh+10*($wconf['h']-1)."px";
 	$param['width'] =	$wconf['w']*$bw+10*($wconf['w']-1)."px";
 	
-	echo "<div class='box ".$wconf['color']."'";
+	echo "<div id='box_$id' class='box ".$wconf['color']."'";
 	echo "style=' ";
 	foreach($param as $a => $b){
 		echo("$a:$b; ");
 	}
-	echo ("'>
-		");
+	echo ("'>");
+
 	echo "<div class='boxtitle'>".$wconf['name']."</div><div class='content'>";
 	include("./widgets/$widget/main.php");
-	echo ("</div>
-		</div>");
+	echo("</div>");
 	return 1;
 
 }

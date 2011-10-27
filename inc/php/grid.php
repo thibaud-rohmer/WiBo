@@ -51,13 +51,22 @@ function autoplace($grid,$wconf,$col){
 	return $coord;	
 }
 
+function getnumberoffreespace($grid){
+	for($i=0;$i<sizeof($grid);$i++){
+		for($j=0;$j<sizeof($grid[$i]);$i++){
+			$res=$res+$grid[$i][$j];
+		}
+	}
+	return $res;
+}
+
 function createbox($id,$wconf,$bw,$bh,$bpl){
-        global $grid,$columns;
+	global $grid,$columns,$remaining;
         if(!isset($wconf['x']) || !isset($wconf['y'])){
                 $coord=autoplace($grid,$wconf,$columns);
                 $wconf['x']=$coord['x'];
                 $wconf['y']=$coord['y'];
-        }
+	}
         $grid=update_grid($grid,$wconf);
 
         $param['left']  =       $wconf['x']*$bw+ ($wconf['x']>0?10*($wconf['x']):0)."px";
@@ -79,8 +88,12 @@ function createbox($id,$wconf,$bw,$bh,$bpl){
                 echo "<div class='boxtitle'>".$wconf['name']."</div>";
 	echo "<div class='altshow refresh'>R</div>";
 	echo "<div class='altshow settings'>S</div>";
-        echo "<div class='content'>";
-        include("./widgets/".$wconf['widget']."/main.php");
+	if($wconf['full'])
+		echo "<div>";
+	else
+		echo "<div class='content'>";
+	
+	include("./widgets/".$wconf['widget']."/main.php");
         echo("</div></div>");
         return 1;
 

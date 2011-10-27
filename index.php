@@ -18,6 +18,7 @@ else
 	 <script type="text/javascript" src="inc/js/wibojs.js"></script>          
 	 <script type="text/javascript" src="inc/js/buttons.js"></script>          
 	 <script type="text/javascript" src="inc/js/infiniteflow.js"></script>          
+	 <script type="text/javascript" src="inc/js/widgets.js"></script>          
 </head>
 
 <body>
@@ -37,9 +38,14 @@ $columns=$conf['WiBo']['columns'];
 require_once('inc/php/grid.php');
 gener_grid($conf);
 
-foreach ($conf as $id => $widget){
-	if($id!='WiBo')
-		createbox($id,$widget,$box_width,$box_height,$conf['WiBo']['columns']);
+$remaining=sizeof($conf);
+foreach ($conf as $id => $wconf){
+	if($id!='WiBo'){
+		if(isset($wconf['x']) && $wconf['x']=='auto')
+			include("./widgets/".$wconf['widget']."/main.php");	
+		createbox($id,$wconf,$box_width,$box_height,$conf['WiBo']['columns']);
+	}	
+	$remaining=$remaining-1;
 }
 ?>
 	</div>

@@ -44,7 +44,7 @@ if(is_file($dir)){
 	exit();
 
 }
-echo '<link rel="stylesheet" href="./widgets/listing/style.css" type="text/css" media="screen" charset="utf-8">';
+echo '<link rel="stylesheet" href="widgets/listing/style.css" type="text/css" media="screen" charset="utf-8">';
 echo"<table>";
 if(is_dir($dir)){
 	$files=scandir($dir);
@@ -54,7 +54,7 @@ if(is_dir($dir)){
 				if(is_file($dir.'/'.$file)){
 					echo "<tr><td class='file'></td><td><a href='widgets/".$wconf['widget']."/main.php?id=$id&dir=$dir/$file'>$file</a></td></tr>";
 				}else{
-					echo "<tr><td class='folder'></td><td><a id='$dir/$file' href='.?id=$id&dir=$dir/$file'>$file</a></td></tr>";
+					echo "<tr class='WIBOJS'><td class='folder'></td><td><a id='$dir/$file' href='?id=$id&dir=$dir/$file#$id'>$file</a></td></tr>";
 				}
 			}
 		}

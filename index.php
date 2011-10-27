@@ -12,9 +12,10 @@ else
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title><?php echo $conf['WiBo']['page_title']; ?></title>
 	<meta name="author" content="Thibaud Rohmer">
-	<link rel="stylesheet" href="inc/style/<?php echo $conf['WiBo']['style']; ?>.css" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="inc/css/<?php echo $conf['WiBo']['style']; ?>.css" type="text/css" media="screen" charset="utf-8">
 	 <script type="text/javascript" src="inc/jQuery/jquery.min.js"></script>          
 	 <script type="text/javascript" src="inc/jQuery/jquery-ui.min.js"></script>          
+	 <script type="text/javascript" src="inc/js/wibojs.js"></script>          
 	 <script type="text/javascript" src="inc/js/buttons.js"></script>          
 	 <script type="text/javascript" src="inc/js/infiniteflow.js"></script>          
 </head>
@@ -33,11 +34,11 @@ $box_width=($pagewidth - 10* ($conf['WiBo']['columns']-1))/ $conf['WiBo']['colum
 $box_height=$conf['WiBo']['boxheight'];
 $columns=$conf['WiBo']['columns'];
 
-include('inc/functions.php');
+require_once('inc/php/grid.php');
 gener_grid($conf);
 
 foreach ($conf as $id => $widget){
-	if($val!='WiBo')
+	if($id!='WiBo')
 		createbox($id,$widget,$box_width,$box_height,$conf['WiBo']['columns']);
 }
 ?>

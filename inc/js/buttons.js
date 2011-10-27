@@ -5,4 +5,11 @@ $('document').ready(function(){
 			id=$(this).parent().attr('id');
 			$(this).parent().children('.content').load('loadwidget.php?id='+id);
 		});
+
+		$('.settings').click(function(){
+			id=$(this).parent().attr('id');
+			$(this).parent().children('.content').load('loadwidget.php?id='+id+'&inf=conf');
+		});
+
+
 });

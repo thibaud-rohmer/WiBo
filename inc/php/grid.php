@@ -41,7 +41,7 @@ function autoplace($grid,$wconf,$col){
 	if($coord['w']>$col) $coord['w']=$col;
 
 	while(!(free_space($grid,$coord['y'],$coord['x'],$coord['h'],$coord['w']))){
-		if($coord['x']+$coord['w']>$col){
+		if($coord['x']+$coord['w']>$col-1){
 			$coord['x']=0;
 			$coord['y']++;
 		}else{
@@ -50,8 +50,6 @@ function autoplace($grid,$wconf,$col){
 	}
 	return $coord;	
 }
-
-
 
 function createbox($id,$wconf,$bw,$bh,$bpl){
         global $grid,$columns;
@@ -70,7 +68,7 @@ function createbox($id,$wconf,$bw,$bh,$bpl){
         if(file_exists("./widgets/".$wconf['widget']."/style.css"))
                 echo '<link rel="stylesheet" href="./widgets/'.$wconf['widget'].'/style.css" type="text/css" media="screen" charset="utf-8">';
 
-        echo "<div id='$id' class='box ".$wconf['color']."'";
+        echo "<div id='$id' class='box ".$wconf['widget']." ".$wconf['color']."'";
         echo "style=' ";
         foreach($param as $a => $b){
                 echo("$a:$b; ");
@@ -78,14 +76,14 @@ function createbox($id,$wconf,$bw,$bh,$bpl){
         echo ("'>");
 
         if(isset($wconf['name'])) 
-                echo "<div class='boxtitle'>".$wconf['name']."</div><div class='altshow refresh'>R</div><div class='content'>";
-        else
-                echo "<div class='content'>";
+                echo "<div class='boxtitle'>".$wconf['name']."</div>";
+	echo "<div class='altshow refresh'>R</div>";
+	echo "<div class='altshow settings'>S</div>";
+        echo "<div class='content'>";
         include("./widgets/".$wconf['widget']."/main.php");
         echo("</div></div>");
         return 1;
 
 }
-
 
 ?>
